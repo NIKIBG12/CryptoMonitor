@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoMonitor.WPF"
+        xmlns:controls ="clr-namespace:CryptoMonitor.WPF.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
+        <ContentControl Grid.Row="1"  Content="{Binding Navigator.CurrentViewModel}"/>
     </Grid>
 </Window>

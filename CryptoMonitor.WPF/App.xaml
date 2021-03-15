@@ -2,8 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CryptoMonitor.WPF"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewmodels="clr-namespace:CryptoMonitor.WPF.ViewModels"
+             xmlns:views="clr-namespace:CryptoMonitor.WPF.Views">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/BasicStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ProfileViewModel}">
+                <views:ProfileView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="CryptoMonitor.WPF.Controls.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CryptoMonitor.WPF.Controls"
+             xmlns:nav="clr-namespace:CryptoMonitor.WPF.State.Navigators"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1"  Text="Crypto Monitor" Background="{StaticResource PrimaryBrush2}" Margin="0,13,0,-30" />
+        <TextBlock Grid.Row="0"  Background="{StaticResource PrimaryBrush1}" Grid.RowSpan="2" Margin="0,0,0,-8" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+            <RadioButton Grid.Column="0" Content="Home" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
+            <RadioButton Grid.Column="1" Content="Profile" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Profile}"/>
+            <RadioButton Grid.Column="2" Content="Buy Crypto"/>
+        <RadioButton Grid.Column="3" Content="Sell Crypto"/>
+    </Grid>
+    </Grid> 
+</UserControl>
