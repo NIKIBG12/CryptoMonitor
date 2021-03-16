@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoMonitor.WPF"
-        xmlns:controls ="clr-namespace:CryptoMonitor.WPF.Controls"
+        xmlns:controls ="clr-namespace:CryptoMonitor.WPF.Controls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize"  Foreground="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

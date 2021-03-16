@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CryptoMonitor.WPF
+namespace CryptoMonitor.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CryptoInfoList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CryptoInfoList : UserControl
     {
-        public MainWindow()
+        public CryptoInfoList()
         {
             InitializeComponent();
-        }
-
-        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          
         }
     }
 }
