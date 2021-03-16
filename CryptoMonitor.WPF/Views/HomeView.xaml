@@ -14,6 +14,6 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Home"/>
 
-        <controls:CryptoInfoList Grid.Row="1" Margin="0 10" HorizontalAlignment="Left" DataContext="{Binding CryptoInfoViewModel}"/>
+        <controls:CryptoInfoList Grid.Row="1" Margin="0 10" HorizontalAlignment="Center" DataContext="{Binding CryptoInfoViewModel}"/>
     </Grid>
 </UserControl>

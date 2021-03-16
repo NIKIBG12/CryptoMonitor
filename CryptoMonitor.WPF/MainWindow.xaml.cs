@@ -24,10 +24,5 @@ namespace CryptoMonitor.WPF
         {
             InitializeComponent();
         }
-
-        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          
-        }
     }
 }

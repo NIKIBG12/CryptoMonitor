@@ -8,11 +8,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize"  Foreground="White">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
-        <ContentControl Grid.Row="1"  Content="{Binding Navigator.CurrentViewModel}"/>
+        <Grid Background="#FF140054">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="257*"/>
+                <ColumnDefinition Width="543*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Height="70" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF6531D6" />
+            <TextBlock Text="CryptoMonitor" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Grid.Column="1" Margin="29,10,0,0"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
+            <ContentControl Grid.Column="1"  Content="{Binding Navigator.CurrentViewModel}"/>
+        </Grid>
+        
     </Grid>
 </Window>

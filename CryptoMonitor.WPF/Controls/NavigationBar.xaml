@@ -4,29 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoMonitor.WPF.Controls"
-             xmlns:nav="clr-namespace:CryptoMonitor.WPF.State.Navigators"
+             xmlns:vm="clr-namespace:CryptoMonitor.WPF.ViewModels"
+             xmlns:nav="clr-namespace:CryptoMonitor.WPF.State.Navigators" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:CryptoMonitor.WPF.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"  Padding ="5" FontSize="20" Foreground="White" Text="Crypto Monitor" Background="{StaticResource PrimaryBrush1}"/>
-        <Grid Grid.Row="1"  Background="{StaticResource PrimaryBrush2}">
-            <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-            <RadioButton Grid.Column="0" Style="{StaticResource Button}" Content="Home" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
-            <RadioButton Grid.Column="1" Style="{StaticResource Button}" Content="Profile" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Profile}"/>
-            <RadioButton Grid.Column="2" Style="{StaticResource Button}" Content="Buy Crypto"/>
-            <RadioButton Grid.Column="3" Style="{StaticResource Button}" Content="Sell Crypto"/>
-            
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:EqualValueToParameterConverter x:Key="EqualValueToParameterConverter" />
+    </UserControl.Resources>
+
+    <Grid x:Name="GridMain" Width="100" HorizontalAlignment="Left" Background="#FF2C176F" Margin="0,72,0,0">
+        <StackPanel>
+            <ListView x:Name="ListViewMenu" Foreground="White" Background="#FF2C176F" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListViewItem>
+                    <RadioButton Height="32" Width="96" IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter= {StaticResource EqualValueToParameterConverter},
+                        ConverterParameter={x:Type vm:HomeViewModel}}" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                                 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ViewDashboard"/>
+                            <TextBlock Text="Home"/>
+                        </StackPanel>
+                    </RadioButton>
+                </ListViewItem>
+                
+                <ListViewItem>
+                    <RadioButton Height="32" Width="96" IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter= {StaticResource EqualValueToParameterConverter},
+                        ConverterParameter={x:Type vm:ProfileViewModel}}" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Profile}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account"/>
+                            <TextBlock Text="Profile"/>
+                        </StackPanel>
+                    </RadioButton>
+                </ListViewItem>
+            </ListView>
+        </StackPanel>
     </Grid>
-    </Grid> 
 </UserControl>
