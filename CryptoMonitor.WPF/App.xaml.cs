@@ -1,5 +1,4 @@
-﻿using CryptoMonitor.Domain.Services;
-using CryptoMonitor.WPF.ViewModels;
+﻿using CryptoMonitor.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,7 +16,7 @@ namespace CryptoMonitor.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Window window = new MainWindow(); 
+            Window window = new MainWindow();
             window.DataContext = new MainViewModel();
                 window.Show();
             base.OnStartup(e);

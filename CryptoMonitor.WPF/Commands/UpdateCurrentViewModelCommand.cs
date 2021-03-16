@@ -1,5 +1,4 @@
-﻿using CryptoMonitor.Domain.Services;
-using CryptoMonitor.WPF.State.Navigators;
+﻿using CryptoMonitor.WPF.State.Navigators;
 using CryptoMonitor.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace CryptoMonitor.WPF.Commands
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        _navigator.CurrentViewModel = new HomeViewModel(CryptoInfoViewModel.LoadCryptoInfoViewModel(new CryptoInfoService()));
+                        _navigator.CurrentViewModel = new HomeViewModel();
                         break;
                     case ViewType.Profile:
                         _navigator.CurrentViewModel = new ProfileViewModel();

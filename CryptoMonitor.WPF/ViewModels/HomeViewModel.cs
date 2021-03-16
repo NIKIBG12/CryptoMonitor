@@ -8,11 +8,5 @@ namespace CryptoMonitor.WPF.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public CryptoInfoViewModel CryptoInfoViewModel { get; set; }
-        public HomeViewModel(CryptoInfoViewModel cryptoInfoViewModel)
-        {
-            CryptoInfoViewModel = cryptoInfoViewModel;
-        }
-
     }
 }

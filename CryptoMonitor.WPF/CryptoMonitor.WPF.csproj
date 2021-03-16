@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CryptoMonitor.Domain\CryptoMonitor.Domain.csproj" />
     <ProjectReference Include="..\CryptoMonitor.EntityFramework\CryptoMonitor.EntityFramework.csproj" />
   </ItemGroup>

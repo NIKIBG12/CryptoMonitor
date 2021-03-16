@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoMonitor.Domain", "Cry
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoMonitor.EntityFramework", "CryptoMonitor.EntityFramework\CryptoMonitor.EntityFramework.csproj", "{EFE5ED36-6EEA-4414-B5A5-117ED8B3CEF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoMonitor.WPF", "CryptoMonitor.WPF\CryptoMonitor.WPF.csproj", "{BEA4A564-9FE5-4076-91F5-603B42EF91F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoMonitor.WPF", "CryptoMonitor.WPF\CryptoMonitor.WPF.csproj", "{BEA4A564-9FE5-4076-91F5-603B42EF91F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

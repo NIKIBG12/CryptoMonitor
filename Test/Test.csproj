@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CryptoMonitor.CryptoInfoAPI\CryptoMonitor.CryptoInfoAPI.csproj" />
     <ProjectReference Include="..\CryptoMonitor.Domain\CryptoMonitor.Domain.csproj" />
+    <ProjectReference Include="..\CryptoMonitor.EntityFramework\CryptoMonitor.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>
