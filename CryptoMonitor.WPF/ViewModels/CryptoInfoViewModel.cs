@@ -2,15 +2,19 @@
 using CryptoMonitor.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace CryptoMonitor.WPF.ViewModels 
 {
+
     public class CryptoInfoViewModel : ViewModelBase
     {
         private readonly ICryptoInfoService _cryptoInfoService;
+        private static CryptoInfoViewModel cryptoInfoViewModel;
 
         private CryptoInfo _BTC;
         public CryptoInfo BTC
@@ -150,16 +154,30 @@ namespace CryptoMonitor.WPF.ViewModels
 
         public static CryptoInfoViewModel LoadCryptoInfoViewModel(ICryptoInfoService cryptoInfoService)
         {
-            CryptoInfoViewModel cryptoInfoViewModel = new CryptoInfoViewModel(cryptoInfoService);
-            cryptoInfoViewModel.LoadCryptoInfoService();
+            if(cryptoInfoViewModel == null)
+            {
+                cryptoInfoViewModel = new CryptoInfoViewModel(cryptoInfoService);
+                cryptoInfoViewModel.LoadCryptoInfoService();
+            }
             return cryptoInfoViewModel;
         }
+
+
+
         private void LoadCryptoInfoService()
+        {
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            dispatcherTimer.Tick += new EventHandler(GetInfo);
+            dispatcherTimer.Start();
+       
+        }
+        private void GetInfo(object sender, EventArgs e)
         {
             _cryptoInfoService.GetCryptoInfo(CryptoType.BTC).ContinueWith(task =>
             {
-                if(task.Exception == null)
-               {
+                if (task.Exception == null)
+                {
                     BTC = task.Result;
                 }
             });
@@ -227,7 +245,6 @@ namespace CryptoMonitor.WPF.ViewModels
                     LINK = task.Result;
                 }
             });
-
         }
 
     }

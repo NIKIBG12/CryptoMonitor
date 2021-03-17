@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <local:CryptoCard Grid.Column="0" Margin="20 20" DataContext="{Binding BTC}"/>
+            <local:CryptoCard x:Name="BtcCard" Grid.Column="0" DataContext="{Binding BTC}"  Margin="20 20" />
             <local:CryptoCard Grid.Column="1" Margin="20 20" DataContext="{Binding ETH}"/>
             <local:CryptoCard Grid.Column="2" Margin="20 20" DataContext="{Binding BNB}"/>
         </Grid>
