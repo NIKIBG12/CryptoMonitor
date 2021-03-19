@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoMonitor.Domain.Services
+namespace CryptoMonitor.Domain.Models
 {
-    public interface ICryptoPriceService
+    public class LowestPrice
     {
-        Task<string> GetPrice(string symbol);
+        public double lowestPrice { get; set; }
     }
 }

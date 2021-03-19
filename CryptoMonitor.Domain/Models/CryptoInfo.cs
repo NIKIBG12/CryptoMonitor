@@ -33,14 +33,8 @@ namespace CryptoMonitor.Domain.Models
         [JsonProperty("base")]
         public string Base { get; set; }
 
-        [JsonProperty("target")]
-        public string Target { get; set; }
-
         [JsonProperty("price")]
-        public string Price { get; set; }
-
-        [JsonProperty("volume")]
-        public string Volume { get; set; }
+        public double Price { get; set; }
 
         [JsonProperty("change")]
         public string Change { get; set; }

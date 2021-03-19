@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace CryptoMonitor.Domain.Models
 {
-    public class CryptoCurrency
+    public class CryptoCurrency : DomainObject
     {
-        public string Symbol { get; set; }
+        public int Id { get; set; }
+        public string Ticker { get; set; }
 
-        public double Price { get; set; }
+        public double CurrentPrice { get; set; }
     }
 }

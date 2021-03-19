@@ -1,4 +1,7 @@
-﻿using CryptoMonitor.Domain.Services;
+﻿using CryptoMonitor.Domain.Models;
+using CryptoMonitor.Domain.Services;
+using CryptoMonitor.EntityFramework;
+using CryptoMonitor.EntityFramework.Services;
 using CryptoMonitor.WPF.State.Navigators;
 using CryptoMonitor.WPF.ViewModels;
 using System;
@@ -13,6 +16,7 @@ namespace CryptoMonitor.WPF.Commands
 {
     public class UpdateCurrentViewModelCommand : ICommand
     {
+        private CryptoDbContextFactory dbContextFactory;
         public event EventHandler CanExecuteChanged;
 
         private INavigator _navigator;
@@ -20,6 +24,7 @@ namespace CryptoMonitor.WPF.Commands
         public UpdateCurrentViewModelCommand(INavigator navigator)
         {
             _navigator = navigator;
+            dbContextFactory = new CryptoDbContextFactory();
         }
 
         public bool CanExecute(object parameter)
@@ -35,7 +40,7 @@ namespace CryptoMonitor.WPF.Commands
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        _navigator.CurrentViewModel = new HomeViewModel(CryptoInfoViewModel.LoadCryptoInfoViewModel(new CryptoInfoService()));
+                        _navigator.CurrentViewModel = new HomeViewModel(CryptoInfoViewModel.LoadCryptoInfoViewModel(new CryptoInfoService(), new GenerecDataService<CryptoCurrency>(dbContextFactory)));
                         break;
                     case ViewType.Profile:
                         _navigator.CurrentViewModel = new ProfileViewModel();

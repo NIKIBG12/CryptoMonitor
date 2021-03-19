@@ -1,4 +1,6 @@
-﻿using CryptoMonitor.Domain.Services;
+﻿using CryptoMonitor.Domain.Models;
+using CryptoMonitor.Domain.Services;
+using CryptoMonitor.EntityFramework.Services;
 using CryptoMonitor.WPF.ViewModels;
 using System;
 using System.Collections.Generic;

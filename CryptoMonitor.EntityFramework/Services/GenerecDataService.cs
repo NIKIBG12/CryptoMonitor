@@ -57,8 +57,7 @@ namespace CryptoMonitor.EntityFramework.Services
                 IEnumerable<T> entities = await context.Set<T>().ToListAsync();
                 return entities;
             }
-        }
-
+        } 
         public async Task<T> Update(int id, T entity)
         {
                 using (CryptoDbContext context = _contextFactory.CreateDbContext())

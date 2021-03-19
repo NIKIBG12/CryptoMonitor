@@ -24,7 +24,7 @@ namespace CryptoMonitor.Domain.Services
                 return cryptoInfo;
             }
 
-        }
+          }
         private string GetUriSuffix(CryptoType cryptoType)
         {
             switch (cryptoType)
