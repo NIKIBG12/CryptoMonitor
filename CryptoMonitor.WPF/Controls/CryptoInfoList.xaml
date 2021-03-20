@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoMonitor.WPF.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="850">
     <Grid Margin="0,46,0,-46">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -13,8 +13,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="28,10,204,222">
+        <Grid Grid.Row="1" Margin="-2,18,234,214">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -23,17 +25,23 @@
             <local:CryptoCard x:Name="BtcCard" Grid.Column="0" DataContext="{Binding BTC}"  Margin="20 20" />
             <local:CryptoCard Grid.Column="1" Margin="20 20" DataContext="{Binding ETH}"/>
             <local:CryptoCard Grid.Column="2" Margin="20 20" DataContext="{Binding BNB}"/>
+            <local:CryptoCard Grid.Column="3" Margin="20 20" DataContext="{Binding USDT}"/>
+            <local:CryptoCard Grid.Column="4" Margin="16,20,24,20" DataContext="{Binding ADA}"/>
         </Grid>
 
-        <Grid Grid.Row ="1" Margin="32,144,200,88">
+        <Grid Grid.Row ="1" Margin="2,152,230,80">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <local:CryptoCard Grid.Column="0" Margin="20 20" DataContext="{Binding USDT}"/>
-            <local:CryptoCard Grid.Column="1" Margin="24,20,16,20" DataContext="{Binding ADA}"/>
-            <local:CryptoCard Grid.Column="2" Margin="20 20" DataContext="{Binding DOT}"/>
+            <local:CryptoCard Grid.Column="0" Margin="20 20" DataContext="{Binding DOT}"/>
+            <local:CryptoCard Grid.Column="1" Margin="24,20,16,20" DataContext="{Binding XRP}"/>
+            <local:CryptoCard Grid.Column="2" Margin="20 20" DataContext="{Binding UNI}"/>
+            <local:CryptoCard Grid.Column="3" Margin="20 20" DataContext="{Binding LTC}"/>
+            <local:CryptoCard Grid.Column="4" Margin="16,20,24,20" DataContext="{Binding LINK}"/>
         </Grid>
     </Grid>
 </UserControl>

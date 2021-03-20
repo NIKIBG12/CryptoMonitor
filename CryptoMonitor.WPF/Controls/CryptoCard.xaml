@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10">
-        <Grid Margin="10" Background="{Binding Color, FallbackValue=#8803fc}">
+        <Grid Margin="10" Background="{Binding Color, FallbackValue=#faff78}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>

@@ -10,10 +10,9 @@ namespace CryptoMonitor.EntityFramework
 {
     public class CryptoDbContext : DbContext
     {
-        public DbSet<LowestPrice> LowestPrices { get; set; }
+        public DbSet<User> Users { get; set; }
 
-        public DbSet<HighestPrice> HighestPrices { get; set; }
-
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<CryptoCurrency> CryptoCurrecies { get; set; }
 
         public CryptoDbContext(DbContextOptions options) : base(options)
@@ -33,9 +32,6 @@ namespace CryptoMonitor.EntityFramework
             new CryptoCurrency { Id = 8, Ticker = "UNI", CurrentPrice = 0.00 },
             new CryptoCurrency { Id = 9, Ticker = "LTC", CurrentPrice = 0.00 },
             new CryptoCurrency { Id = 10, Ticker = "LINK", CurrentPrice = 0.00 });
-
-            modelBuilder.Entity<HighestPrice>().HasNoKey();
-            modelBuilder.Entity<LowestPrice>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
     }

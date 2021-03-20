@@ -2,6 +2,7 @@
 using CryptoMonitor.Domain.Services;
 using CryptoMonitor.EntityFramework.Services;
 using CryptoMonitor.WPF.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,9 +20,9 @@ namespace CryptoMonitor.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Window window = new MainWindow(); 
+            Window window = new MainWindow();
             window.DataContext = new MainViewModel();
-                window.Show();
+            window.Show();
             base.OnStartup(e);
         }
     }

@@ -72,7 +72,7 @@ namespace CryptoMonitor.WPF.Widgets
             this.Name = name;
             this.Price = 0.0;
             this.Change = 0.0;
-            this.Color = "#8803fc";
+            this.Color = "#faff78";
         }
         }
 }

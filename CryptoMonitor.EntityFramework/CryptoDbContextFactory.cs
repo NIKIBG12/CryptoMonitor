@@ -13,7 +13,7 @@ namespace CryptoMonitor.EntityFramework
             public CryptoDbContext CreateDbContext(string[] args = null)
             {
                 DbContextOptionsBuilder options = new DbContextOptionsBuilder<CryptoDbContext>();
-                options.UseMySQL("server=eu01-sql.pebblehost.com;database=.........;user=........;password=........");
+                options.UseMySQL("server=eu01-sql.pebblehost.com;database=customer_122878_cryptoc;user=customer_122878_cryptoc;password=9z@4eZ#nZlpROXWG1b1c");
                 return new CryptoDbContext(options.Options);
             }
     }

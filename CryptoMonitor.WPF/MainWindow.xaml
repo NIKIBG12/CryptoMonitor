@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CryptoMonitor.WPF"
         xmlns:controls ="clr-namespace:CryptoMonitor.WPF.Controls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize"  Foreground="White">
+        Title="CryptoMonitor" Height="450" Width="950" ResizeMode="NoResize"  Foreground="White">
     <Grid>
         <Grid Background="#FF140054">
             <Grid.ColumnDefinitions>
@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="543*"/>
             </Grid.ColumnDefinitions>
             <Grid Height="70" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF6531D6" />
-            <TextBlock Text="CryptoMonitor" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Grid.Column="1" Margin="29,10,0,0"/>
+            <TextBlock Text="CryptoMonitor" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="35" Margin="0,10,0,0" Width="240" Grid.ColumnSpan="2"/>
         </Grid>
 
         <Grid>
@@ -25,6 +25,6 @@
             <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
             <ContentControl Grid.Column="1"  Content="{Binding Navigator.CurrentViewModel}"/>
         </Grid>
-        
+
     </Grid>
 </Window>

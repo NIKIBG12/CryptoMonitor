@@ -213,7 +213,7 @@ namespace CryptoMonitor.WPF.ViewModels
                 }
                 else
                 {
-                    widget.Color = "#8803fc";
+                    widget.Color = "#faff78";
                 }
 
                 widgets.Add(widget);

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoMonitor.Domain.Models
+namespace CryptoMonitor.EntityFrameworkTests.Services
 {
-    public class LowestPrice
+    class GenerecDataServiceTests
     {
-        public double lowestPrice { get; set; }
     }
 }

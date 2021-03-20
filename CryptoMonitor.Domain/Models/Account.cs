@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CryptoMonitor.Domain.Models
 {
-    public class HighestPrice
+   public class Account : DomainObject
     {
-        public double highestPrice { get; set; }
+        public User AccountOwner { get; set; }
     }
 }
