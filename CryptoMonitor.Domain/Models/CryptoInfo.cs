@@ -20,12 +20,20 @@ namespace CryptoMonitor.Domain.Models
         LTC,
         LINK
     }
+
+
     public partial class CryptoInfo
     {
         [JsonProperty("ticker")]
         public Ticker Ticker { get; set; }
 
         public CryptoType Type { get; set; }
+
+        public CryptoInfo(CryptoType type, Ticker ticker)
+        {
+            this.Type = type;
+            this.Ticker = ticker;
+        }
     }
 
     public partial class Ticker
@@ -37,6 +45,13 @@ namespace CryptoMonitor.Domain.Models
         public double Price { get; set; }
 
         [JsonProperty("change")]
-        public string Change { get; set; }
+        public double Change { get; set; }
+
+        public Ticker(string ticker, double price, double change)
+        {
+            this.Base = ticker;
+            this.Price = price;
+            this.Change = change;
+        }
     }
 }

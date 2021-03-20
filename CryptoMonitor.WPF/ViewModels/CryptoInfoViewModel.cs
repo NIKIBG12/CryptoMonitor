@@ -1,11 +1,14 @@
 ﻿using CryptoMonitor.Domain.Models;
 using CryptoMonitor.Domain.Services;
 using CryptoMonitor.EntityFramework;
+using CryptoMonitor.WPF.Models;
+using CryptoMonitor.WPF.Widgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
@@ -17,10 +20,12 @@ namespace CryptoMonitor.WPF.ViewModels
         private readonly ICryptoInfoService _cryptoInfoService;
         private static CryptoInfoViewModel cryptoInfoViewModel;
         private readonly IDataService<CryptoCurrency> _cryptoCurrencyService;
-        //List<CryptoInfo> Labels = new List<CryptoInfo>();
+        private Timer timer;
+        List<CryptoWidget> Labels = new List<CryptoWidget>();
 
-        private CryptoInfo _BTC;
-        public CryptoInfo BTC
+
+        private CryptoWidget _BTC;
+        public CryptoWidget BTC
         {
             get
             {
@@ -32,8 +37,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(BTC));
             }
         }
-        private CryptoInfo _ETH;
-        public CryptoInfo ETH
+        private CryptoWidget _ETH;
+        public CryptoWidget ETH
         {
             get
             {
@@ -45,8 +50,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(ETH));
             }
         }
-        private CryptoInfo _BNB;
-        public CryptoInfo BNB
+        private CryptoWidget _BNB;
+        public CryptoWidget BNB
         {
             get
             {
@@ -58,8 +63,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(BNB));
             }
         }
-        private CryptoInfo _USDT;
-        public CryptoInfo USDT
+        private CryptoWidget _USDT;
+        public CryptoWidget USDT
         {
             get
             {
@@ -71,8 +76,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(USDT));
             }
         }
-        private CryptoInfo _ADA;
-        public CryptoInfo ADA
+        private CryptoWidget _ADA;
+        public CryptoWidget ADA
         {
             get
             {
@@ -84,8 +89,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(ADA));
             }
         }
-        private CryptoInfo _DOT;
-        public CryptoInfo DOT
+        private CryptoWidget _DOT;
+        public CryptoWidget DOT
         {
             get
             {
@@ -97,8 +102,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(DOT));
             }
         }
-        private CryptoInfo _XRP;
-        public CryptoInfo XRP
+        private CryptoWidget _XRP;
+        public CryptoWidget XRP
         {
             get
             {
@@ -110,8 +115,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(XRP));
             }
         }
-        private CryptoInfo _UNI;
-        public CryptoInfo UNI
+        private CryptoWidget _UNI;
+        public CryptoWidget UNI
         {
             get
             {
@@ -123,8 +128,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(UNI));
             }
         }
-        private CryptoInfo _LTC;
-        public CryptoInfo LTC
+        private CryptoWidget _LTC;
+        public CryptoWidget LTC
         {
             get
             {
@@ -136,8 +141,8 @@ namespace CryptoMonitor.WPF.ViewModels
                 OnPropertyChange(nameof(LTC));
             }
         }
-        private CryptoInfo _LINK;
-        public CryptoInfo LINK
+        private CryptoWidget _LINK;
+        public CryptoWidget LINK
         {
             get
             {
@@ -154,343 +159,84 @@ namespace CryptoMonitor.WPF.ViewModels
         {
             _cryptoInfoService = cryptoInfoService;
             _cryptoCurrencyService = cryptoCurrencyService;
-            //Labels.Add(BTC);
-            //Labels.Add(ETH);
-            //Labels.Add(BNB);
-            //Labels.Add(USDT);
-            //Labels.Add(ADA);
-            //Labels.Add(DOT);
-            //Labels.Add(XRP);
-            //Labels.Add(UNI);
-            //Labels.Add(LTC);
-            //Labels.Add(LINK);
+            BTC = new CryptoWidget("BTC");
+            ETH = new CryptoWidget("ETH");
+            BNB = new CryptoWidget("BNB");
+            USDT = new CryptoWidget("USDT");
+            ADA = new CryptoWidget("ADA");
+            DOT = new CryptoWidget("DOT");
+            XRP = new CryptoWidget("XRP");
+            UNI = new CryptoWidget("UNI");
+            LTC = new CryptoWidget("LTC");
+            LINK = new CryptoWidget("LINK");
+            Labels.Add(BTC);
+            Labels.Add(ETH);
+            Labels.Add(BNB);
+            Labels.Add(USDT);
+            Labels.Add(ADA);
+            Labels.Add(DOT);
+            Labels.Add(XRP);
+            Labels.Add(UNI);
+            Labels.Add(LTC);
+            Labels.Add(LINK);
+            timer = new(new TimerCallback(GetInfo), null, 0, 5000);
         }
         public static CryptoInfoViewModel LoadCryptoInfoViewModel(ICryptoInfoService cryptoInfoService, IDataService<CryptoCurrency> cryptoCurrencyService)
         {
             if (cryptoInfoViewModel == null)
             {
                 cryptoInfoViewModel = new CryptoInfoViewModel(cryptoInfoService, cryptoCurrencyService);
-                cryptoInfoViewModel.LoadCryptoInfoService();
             }
             return cryptoInfoViewModel;
         }
-        private void LoadCryptoInfoService()
+
+        private async void GetInfo(object state)
         {
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
-            dispatcherTimer.Tick += new EventHandler(GetInfo);
-            dispatcherTimer.Start();
+            List<CryptoCurrency> cryptoCurrencies = (List<CryptoCurrency>)await _cryptoCurrencyService.GetAll();
+            List<CryptoWidget> widgets = new();
 
-        }
-        private void GetInfo(object sender, EventArgs e)
-        {
-            //List<CryptoCurrency> cryptoCurrencies = null;
-            //_cryptoCurrencyService.GetAll().ContinueWith(task =>
-            //{
-            //    if (task.Exception == null)
-            //    {
-            //        cryptoCurrencies = (List<CryptoCurrency>)task.Result;
-            //    }
-            //});
-            //if (cryptoCurrencies != null)
-            //{
-            //    foreach (var crypto in cryptoCurrencies)
-            //    {
-
-            //        _cryptoInfoService.GetCryptoInfo((CryptoType)crypto.Id - 1).ContinueWith(task =>
-            //        {
-            //            double currentPrice = crypto.CurrentPrice;
-            //            if (task.Exception == null)
-            //            {
-            //                switch (crypto.Id)
-            //                {
-            //                    case 1:
-            //                        BTC = task.Result;
-            //                        break;
-            //                    default:
-            //                        break;
-            //                }
-            //                currentPrice = task.Result.Ticker.Price;
-
-            //            }
-            //            crypto.CurrentPrice = currentPrice;
-            //            _cryptoCurrencyService.Update(crypto.Id, crypto);
-            //        });
-            //    }
-            //}
-
-            CryptoCurrency crypto = null;
-            _cryptoCurrencyService.Get(1).ContinueWith(task =>
+            foreach (var crypto in cryptoCurrencies)
             {
-                if (task.Exception == null)
+
+                CryptoInfo info = await _cryptoInfoService.GetCryptoInfo((CryptoType)crypto.Id - 1);
+                CryptoWidget widget = new(info.Ticker.Base);
+                widget.Name = info.Ticker.Base;
+                widget.Price = info.Ticker.Price;
+                widget.Change = Math.Round((info.Ticker.Price - crypto.CurrentPrice), 2);
+                if(widget.Change > 0)
                 {
-                    crypto = task.Result;
+                    widget.Color = "Green";
                 }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.BTC).ContinueWith(task =>
-             {
-                 if (crypto != null)
-                 {
-                     double currentPrice = crypto.CurrentPrice;
-                     if (task.Exception == null)
-                     {
-                         BTC = task.Result;
-                         currentPrice = task.Result.Ticker.Price;
-
-                     }
-                     crypto.CurrentPrice = currentPrice;
-                     _cryptoCurrencyService.Update(1, crypto);
-
-                 }
-
-             });
-
-            CryptoCurrency crypto2 = null;
-            _cryptoCurrencyService.Get(2).ContinueWith(task =>
-            {
-                if (task.Exception == null)
+                else if(widget.Change < 0)
                 {
-                    crypto2 = task.Result;
+                    widget.Color = "Red";
                 }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.ETH).ContinueWith(task =>
-            {
-                if (crypto2 != null)
+                else
                 {
-                    double currentPrice = crypto2.CurrentPrice;
-                    if (task.Exception == null)
-                    {
-                        ETH = task.Result;
-                        currentPrice = task.Result.Ticker.Price;
+                    widget.Color = "#8803fc";
+                }
 
-                    }
-                    crypto2.CurrentPrice = currentPrice;
-                    _cryptoCurrencyService.Update(2, crypto2);
+                widgets.Add(widget);
+                crypto.CurrentPrice = info.Ticker.Price;
+                await _cryptoCurrencyService.Update(crypto.Id, crypto);
 
+            }
+
+            Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    var widget = Labels[i];
+                    var update = widgets[i];
+                    widget.Name = update.Name;
+                    widget.Price = update.Price;
+                    widget.Change = update.Change;
+                    widget.Color = update.Color;
                 }
             });
 
-            CryptoCurrency crypto3 = null;
-            _cryptoCurrencyService.Get(3).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto3 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.BNB).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto3 != null)
-                    {
-                        double currentPrice = crypto3.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            BNB = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
 
-                        }
-                        crypto3.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(3, crypto3);
-
-                    }
-                }
-            });
-
-            CryptoCurrency crypto4 = null;
-            _cryptoCurrencyService.Get(4).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto4 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.USDT).ContinueWith(task =>
-            {
-                if (crypto4 != null)
-                {
-                    double currentPrice = crypto4.CurrentPrice;
-                    if (task.Exception == null)
-                    {
-                        USDT = task.Result;
-                        currentPrice = task.Result.Ticker.Price;
-
-                    }
-                    crypto4.CurrentPrice = currentPrice;
-                    _cryptoCurrencyService.Update(4, crypto4);
-
-                }
-            });
-
-            CryptoCurrency crypto5 = null;
-            _cryptoCurrencyService.Get(5).ContinueWith(task =>
-                {
-                    if (task.Exception == null)
-                    {
-                        crypto5 = task.Result;
-                    }
-                });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.ADA).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto5 != null)
-                    {
-                        double currentPrice = crypto5.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            ADA = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
-
-                        }
-                        crypto5.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(5, crypto5);
-
-                    }
-                }
-            });
-
-            CryptoCurrency crypto6 = null;
-            _cryptoCurrencyService.Get(6).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto6 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.DOT).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto6 != null)
-                    {
-                        double currentPrice = crypto6.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            DOT = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
-
-                        }
-                        crypto6.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(6, crypto6);
-
-                    }
-                }
-            });
-
-            CryptoCurrency crypto7 = null;
-            _cryptoCurrencyService.Get(7).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto7 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.XRP).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto7 != null)
-                    {
-                        double currentPrice = crypto7.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            XRP = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
-
-                        }
-                        crypto7.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(7, crypto7);
-
-                    }
-                }
-            });
-
-            CryptoCurrency crypto8 = null;
-            _cryptoCurrencyService.Get(8).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto8 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.UNI).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto8 != null)
-                    {
-                        double currentPrice = crypto8.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            UNI = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
-
-                        }
-                        crypto8.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(8, crypto8);
-
-                    }
-                }
-            });
-
-            CryptoCurrency crypto9 = null;
-            _cryptoCurrencyService.Get(9).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto9 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.LTC).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto9 != null)
-                    {
-                        double currentPrice = crypto9.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            LTC = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
-
-                        }
-                        crypto9.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(9, crypto9);
-
-                    }
-                }
-            });
-
-            CryptoCurrency crypto10 = null;
-            _cryptoCurrencyService.Get(10).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    crypto10 = task.Result;
-                }
-            });
-            _cryptoInfoService.GetCryptoInfo(CryptoType.LINK).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    if (crypto10 != null)
-                    {
-                        double currentPrice = crypto10.CurrentPrice;
-                        if (task.Exception == null)
-                        {
-                            LINK = task.Result;
-                            currentPrice = task.Result.Ticker.Price;
-
-                        }
-                        crypto10.CurrentPrice = currentPrice;
-                        _cryptoCurrencyService.Update(10, crypto10);
-
-                    }
-                }
-            });
         }
     }
-}
+    }
 

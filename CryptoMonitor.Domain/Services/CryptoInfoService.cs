@@ -21,6 +21,7 @@ namespace CryptoMonitor.Domain.Services
 
                 CryptoInfo cryptoInfo = JsonConvert.DeserializeObject<CryptoInfo>(jsonResponse);
                 cryptoInfo.Type = cryptoType;
+                client.Dispose();
                 return cryptoInfo;
             }
 
@@ -53,5 +54,6 @@ namespace CryptoMonitor.Domain.Services
                     return "BTC";
             }
         }
+
     }
 }
