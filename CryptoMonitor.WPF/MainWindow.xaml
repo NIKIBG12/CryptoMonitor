@@ -22,9 +22,21 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
-            <ContentControl Grid.Column="1"  Content="{Binding Navigator.CurrentViewModel}"/>
+
+            <Grid Grid.Column="0">
+                <Grid.Style>
+                    <Style TargetType="Grid" >
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Authenticator.IsLoggedIn}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <controls:NavigationBar/>
+            </Grid>
         </Grid>
+        <ContentControl Content="{Binding Navigator.CurrentViewModel}"/>
 
     </Grid>
 </Window>

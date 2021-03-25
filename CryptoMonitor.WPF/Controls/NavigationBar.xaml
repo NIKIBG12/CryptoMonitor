@@ -19,7 +19,7 @@
         <StackPanel>
             <ListView x:Name="ListViewMenu" Foreground="White" Background="#FF2C176F" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListViewItem>
-                    <RadioButton Height="32" Width="96" IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter= {StaticResource EqualValueToParameterConverter},
+                    <RadioButton Height="32" Width="96" IsChecked="{Binding Navigator.CurrentViewModel, Mode= OneWay, Converter= {StaticResource EqualValueToParameterConverter},
                         ConverterParameter={x:Type vm:HomeViewModel}}" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
                                  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}">
                         <StackPanel Orientation="Horizontal">
@@ -30,7 +30,7 @@
                 </ListViewItem>
                 
                 <ListViewItem>
-                    <RadioButton Height="32" Width="96" IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter= {StaticResource EqualValueToParameterConverter},
+                    <RadioButton Height="32" Width="96" IsChecked="{Binding Navigator.CurrentViewModel, Mode=OneWay,Converter= {StaticResource EqualValueToParameterConverter},
                         ConverterParameter={x:Type vm:ProfileViewModel}}" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Profile}">
                         <StackPanel Orientation="Horizontal">

@@ -8,9 +8,10 @@ namespace CryptoMonitor.Domain.Models
 {
     public class CryptoCurrency : DomainObject
     {
-        public int Id { get; set; }
         public string Ticker { get; set; }
 
         public double CurrentPrice { get; set; }
+
+        public User User { get; set; }
     }
 }

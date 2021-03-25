@@ -1,6 +1,7 @@
 ﻿using CryptoMonitor.WPF.Commands;
 using CryptoMonitor.WPF.Models;
 using CryptoMonitor.WPF.ViewModels;
+using CryptoMonitor.WPF.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,8 +27,5 @@ namespace CryptoMonitor.WPF.State.Navigators
                 OnPropertyChange(nameof(CurrentViewModel));
             }
     }
-
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
-
     }
 }

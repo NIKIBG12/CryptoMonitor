@@ -45,9 +45,14 @@ namespace CryptoMonitor.EntityFramework.Migrations
                     b.Property<string>("Ticker")
                         .HasColumnType("text");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("CryptoCurrecies");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CryptoCurrencies");
 
                     b.HasData(
                         new
@@ -142,6 +147,15 @@ namespace CryptoMonitor.EntityFramework.Migrations
                         .HasForeignKey("AccountOwnerId");
 
                     b.Navigation("AccountOwner");
+                });
+
+            modelBuilder.Entity("CryptoMonitor.Domain.Models.CryptoCurrency", b =>
+                {
+                    b.HasOne("CryptoMonitor.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

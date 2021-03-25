@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:CryptoMonitor.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="850">
-    <Grid Margin="0,46,0,-46">
+    <DataGrid ItemsSource="{Binding Labels}"/>
+   <!-- <Grid Margin="0,46,0,-46">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -43,5 +44,5 @@
             <local:CryptoCard Grid.Column="3" Margin="20 20" DataContext="{Binding LTC}"/>
             <local:CryptoCard Grid.Column="4" Margin="16,20,24,20" DataContext="{Binding LINK}"/>
         </Grid>
-    </Grid>
+    </Grid> -->
 </UserControl>

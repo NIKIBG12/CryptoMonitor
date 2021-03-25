@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CryptoMonitor.WPF
+namespace CryptoMonitor.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RegisterView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterView : UserControl
     {
-        public MainWindow(object dataContext)
+        public RegisterView()
         {
             InitializeComponent();
-
-            DataContext = dataContext;
         }
     }
 }

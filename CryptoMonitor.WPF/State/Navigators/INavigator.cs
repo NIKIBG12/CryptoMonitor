@@ -11,13 +11,12 @@ namespace CryptoMonitor.WPF.State.Navigators
     public enum ViewType
     {
         Home,
-        Profile
+        Profile,
+        Login,
+        Register
     }
     public interface INavigator
     {
-       
         ViewModelBase CurrentViewModel { get; set; }
-
-        ICommand UpdateCurrentViewModelCommand { get; }
     }
 }

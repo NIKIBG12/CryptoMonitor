@@ -13,7 +13,7 @@ namespace CryptoMonitor.EntityFramework
         public DbSet<User> Users { get; set; }
 
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<CryptoCurrency> CryptoCurrecies { get; set; }
+        public DbSet<CryptoCurrency> CryptoCurrencies { get; set; }
 
         public CryptoDbContext(DbContextOptions options) : base(options)
         {
