@@ -9,6 +9,20 @@ namespace CryptoMonitor.EntityFramework.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CryptoCurrencies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Ticker = table.Column<string>(type: "text", nullable: true),
+                    CurrentPrice = table.Column<double>(type: "double", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CryptoCurrencies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -30,7 +44,8 @@ namespace CryptoMonitor.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    AccountOwnerId = table.Column<int>(type: "int", nullable: true)
+                    AccountOwnerId = table.Column<int>(type: "int", nullable: true),
+                    Balance = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,41 +59,44 @@ namespace CryptoMonitor.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CryptoCurrencies",
+                name: "CryptoInvestments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Ticker = table.Column<string>(type: "text", nullable: true),
-                    CurrentPrice = table.Column<double>(type: "double", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    AccountId = table.Column<int>(type: "int", nullable: true),
+                    IsPurchase = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CryptoCurrencyInvest_Ticker = table.Column<string>(type: "text", nullable: true),
+                    CryptoCurrencyInvest_Price = table.Column<double>(type: "double", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DateInvested = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CryptoCurrencies", x => x.Id);
+                    table.PrimaryKey("PK_CryptoInvestments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CryptoCurrencies_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_CryptoInvestments_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "CryptoCurrencies",
-                columns: new[] { "Id", "CurrentPrice", "Ticker", "UserId" },
+                columns: new[] { "Id", "CurrentPrice", "Ticker" },
                 values: new object[,]
                 {
-                    { 1, 0.0, "BTC", null },
-                    { 2, 0.0, "ETH", null },
-                    { 3, 0.0, "BNB", null },
-                    { 4, 0.0, "USDT", null },
-                    { 5, 0.0, "ADA", null },
-                    { 6, 0.0, "DOT", null },
-                    { 7, 0.0, "XRP", null },
-                    { 8, 0.0, "UNI", null },
-                    { 9, 0.0, "LTC", null },
-                    { 10, 0.0, "LINK", null }
+                    { 1, 0.0, "BTC" },
+                    { 2, 0.0, "ETH" },
+                    { 3, 0.0, "BNB" },
+                    { 4, 0.0, "USDT" },
+                    { 5, 0.0, "ADA" },
+                    { 6, 0.0, "DOT" },
+                    { 7, 0.0, "XRP" },
+                    { 8, 0.0, "UNI" },
+                    { 9, 0.0, "LTC" },
+                    { 10, 0.0, "LINK" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -87,18 +105,21 @@ namespace CryptoMonitor.EntityFramework.Migrations
                 column: "AccountOwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CryptoCurrencies_UserId",
-                table: "CryptoCurrencies",
-                column: "UserId");
+                name: "IX_CryptoInvestments_AccountId",
+                table: "CryptoInvestments",
+                column: "AccountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "CryptoCurrencies");
 
             migrationBuilder.DropTable(
-                name: "CryptoCurrencies");
+                name: "CryptoInvestments");
+
+            migrationBuilder.DropTable(
+                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "Users");

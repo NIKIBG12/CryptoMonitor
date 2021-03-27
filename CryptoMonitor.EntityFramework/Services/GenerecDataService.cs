@@ -14,20 +14,17 @@ namespace CryptoMonitor.EntityFramework.Services
     {
 
         private readonly CryptoDbContextFactory _contextFactory;
+        private readonly NonQueryDataService<T> _nonQueryDataService;
 
         public GenerecDataService(CryptoDbContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
+            _nonQueryDataService = new NonQueryDataService<T>(contextFactory);
         }
 
         public async Task<T> Create(T entity)
         {
-            using (CryptoDbContext context = _contextFactory.CreateDbContext())
-            {
-                EntityEntry<T> created = await context.Set<T>().AddAsync(entity);
-                await context.SaveChangesAsync();
-                return created.Entity;
-            }
+            return await _nonQueryDataService.Create(entity);
         }
 
         public async Task<bool> Delete(int id)

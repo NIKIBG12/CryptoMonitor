@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CryptoMonitor.EntityFramework.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20210324232716_initial")]
+    [Migration("20210326231738_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace CryptoMonitor.EntityFramework.Migrations
 
                     b.Property<int?>("AccountOwnerId")
                         .HasColumnType("int");
+
+                    b.Property<double>("Balance")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -47,12 +50,7 @@ namespace CryptoMonitor.EntityFramework.Migrations
                     b.Property<string>("Ticker")
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CryptoCurrencies");
 
@@ -119,6 +117,31 @@ namespace CryptoMonitor.EntityFramework.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CryptoMonitor.Domain.Models.CryptoInvestment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateInvested")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsPurchase")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("CryptoInvestments");
+                });
+
             modelBuilder.Entity("CryptoMonitor.Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -151,13 +174,39 @@ namespace CryptoMonitor.EntityFramework.Migrations
                     b.Navigation("AccountOwner");
                 });
 
-            modelBuilder.Entity("CryptoMonitor.Domain.Models.CryptoCurrency", b =>
+            modelBuilder.Entity("CryptoMonitor.Domain.Models.CryptoInvestment", b =>
                 {
-                    b.HasOne("CryptoMonitor.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("CryptoMonitor.Domain.Models.Account", "Account")
+                        .WithMany("CryptoInvestments")
+                        .HasForeignKey("AccountId");
 
-                    b.Navigation("User");
+                    b.OwnsOne("CryptoMonitor.Domain.Models.CryptoCurrencyInvest", "CryptoCurrencyInvest", b1 =>
+                        {
+                            b1.Property<int>("CryptoInvestmentId")
+                                .HasColumnType("int");
+
+                            b1.Property<double>("Price")
+                                .HasColumnType("double");
+
+                            b1.Property<string>("Ticker")
+                                .HasColumnType("text");
+
+                            b1.HasKey("CryptoInvestmentId");
+
+                            b1.ToTable("CryptoInvestments");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CryptoInvestmentId");
+                        });
+
+                    b.Navigation("Account");
+
+                    b.Navigation("CryptoCurrencyInvest");
+                });
+
+            modelBuilder.Entity("CryptoMonitor.Domain.Models.Account", b =>
+                {
+                    b.Navigation("CryptoInvestments");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,6 +14,7 @@ namespace CryptoMonitor.EntityFramework
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<CryptoCurrency> CryptoCurrencies { get; set; }
+        public DbSet<CryptoInvestment> CryptoInvestments { get; set; }
 
         public CryptoDbContext(DbContextOptions options) : base(options)
         {
@@ -32,6 +33,8 @@ namespace CryptoMonitor.EntityFramework
             new CryptoCurrency { Id = 8, Ticker = "UNI", CurrentPrice = 0.00 },
             new CryptoCurrency { Id = 9, Ticker = "LTC", CurrentPrice = 0.00 },
             new CryptoCurrency { Id = 10, Ticker = "LINK", CurrentPrice = 0.00 });
+
+            modelBuilder.Entity<CryptoInvestment>().OwnsOne(a => a.CryptoCurrencyInvest);
             base.OnModelCreating(modelBuilder);
         }
     }

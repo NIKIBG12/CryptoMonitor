@@ -27,6 +27,11 @@
                 <views:RegisterView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:InvestViewModel}">
+                <views:InvestView/>
+            </DataTemplate>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -13,10 +13,13 @@ namespace CryptoMonitor.WPF.State.Navigators
         Home,
         Profile,
         Login,
-        Register
+        Register,
+        Invest
     }
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
+
+        event Action StateChanged;
     }
 }

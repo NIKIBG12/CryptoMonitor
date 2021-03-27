@@ -27,7 +27,7 @@
                 <Grid.Style>
                     <Style TargetType="Grid" >
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Authenticator.IsLoggedIn}" Value="True">
+                            <DataTrigger Binding="{Binding IsLoggedIn}" Value="True">
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -35,8 +35,9 @@
                 </Grid.Style>
                 <controls:NavigationBar/>
             </Grid>
+            <ContentControl Content="{Binding CurrentViewModel}"/>
         </Grid>
-        <ContentControl Content="{Binding Navigator.CurrentViewModel}"/>
+
 
     </Grid>
 </Window>

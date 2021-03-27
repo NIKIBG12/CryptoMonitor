@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CryptoMonitor.WPF.State.Navigators
 {
-    public class Navigator : ObservableObject, INavigator
+    public class Navigator : INavigator
     { 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -24,8 +24,9 @@ namespace CryptoMonitor.WPF.State.Navigators
             set
             {
                 _currentViewModel = value;
-                OnPropertyChange(nameof(CurrentViewModel));
+                StateChanged?.Invoke();
             }
-    }
+        }
+        public event Action StateChanged;
     }
 }

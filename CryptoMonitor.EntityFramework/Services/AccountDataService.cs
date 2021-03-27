@@ -34,8 +34,8 @@ namespace CryptoMonitor.EntityFramework.Services
         {
             using (CryptoDbContext context = _contextFactory.CreateDbContext())
             {
-                Account entity = await context.Accounts
-                    .Include(a => a.AccountOwner)
+                Account entity = await context.Accounts.Include(a => a.AccountOwner)
+                    .Include(a => a.CryptoInvestments)
                     .FirstOrDefaultAsync((e) => e.Id == id);
                 return entity;
             }
@@ -47,6 +47,7 @@ namespace CryptoMonitor.EntityFramework.Services
             {
                 IEnumerable<Account> entities = await context.Accounts
                     .Include(a => a.AccountOwner)
+                    .Include(a => a.CryptoInvestments)
                     .ToListAsync();
                 return entities;
             }
@@ -58,6 +59,7 @@ namespace CryptoMonitor.EntityFramework.Services
             {
                 return await context.Accounts
                     .Include(a => a.AccountOwner)
+                    .Include(a => a.CryptoInvestments)
                     .FirstOrDefaultAsync(a => a.AccountOwner.Email == email);
             }
         }
@@ -68,6 +70,7 @@ namespace CryptoMonitor.EntityFramework.Services
             {
                 return await context.Accounts
                     .Include(a => a.AccountOwner)
+                    .Include(a => a.CryptoInvestments)
                     .FirstOrDefaultAsync(a => a.AccountOwner.Username == username);
             }
         }

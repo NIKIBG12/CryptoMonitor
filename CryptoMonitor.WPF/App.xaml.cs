@@ -23,11 +23,15 @@ namespace CryptoMonitor.WPF
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void  OnStartup(StartupEventArgs e)
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
-            //IAuthenticationService authentication = serviceProvider.GetRequiredService<IAuthenticationService>();
-            //authentication.Register("test@abv.bg", "Niki", "n1234", "n1234");
+            //IAccountService accountService = new AccountDataService(new EntityFramework.CryptoDbContextFactory());
+            //ICryptoPriceService cryptoPriceService = new CryptoPriceService();
+            //IInvestService investService = new InvestService(cryptoPriceService, accountService);
+
+            //Account investor = await accountService.Get(1);
+            //await investService.Invest(investor, "BTC", 1);
 
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
@@ -43,10 +47,13 @@ namespace CryptoMonitor.WPF
             services.AddSingleton<IAccountService, AccountDataService>();
             services.AddSingleton<ICryptoInfoService, CryptoInfoService>();
             services.AddSingleton<ICryptoCurrencyService, CryptoCurrencyService>();
+            services.AddSingleton<ICryptoPriceService, CryptoPriceService>();
+            services.AddSingleton<IInvestService, InvestService>();
 
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
             services.AddSingleton<ICryptoMonitorViewModelAbstract, CryptoMonitorViewModelAbstract>();
+            services.AddSingleton<InvestViewModel>();
 
             services.AddSingleton<ProfileViewModel>();
             services.AddSingleton<HomeViewModel>(services => new HomeViewModel(CryptoInfoViewModel
@@ -65,6 +72,7 @@ namespace CryptoMonitor.WPF
             services.AddSingleton<ViewModelRenavigator<HomeViewModel>>();
             services.AddSingleton<ViewModelRenavigator<RegisterViewModel>>();
             services.AddSingleton<ViewModelRenavigator<LoginViewModel>>();
+            services.AddSingleton<ViewModelRenavigator<InvestViewModel>>();
             services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => 
             {
                 return () => new RegisterViewModel(services.GetRequiredService<IAuthenticator>(), services.GetRequiredService<ViewModelRenavigator<LoginViewModel>>(), services.GetRequiredService<ViewModelRenavigator<LoginViewModel>>()); 
@@ -76,9 +84,16 @@ namespace CryptoMonitor.WPF
                 (services.GetRequiredService<IAuthenticator>(), services.GetRequiredService<ViewModelRenavigator<HomeViewModel>>(), services.GetRequiredService<ViewModelRenavigator<RegisterViewModel>>());
             });
 
-            services.AddScoped<INavigator, Navigator>();
-            services.AddScoped<IAuthenticator, Authenticator>();
+            services.AddSingleton<CreateViewModel<InvestViewModel>>(services =>
+            {
+                return () => services.GetRequiredService<InvestViewModel>();
+            });
+
+            services.AddSingleton<INavigator, Navigator>();
+            services.AddSingleton<IAuthenticator, Authenticator>();
+            services.AddSingleton<IAccountStore, AccountStore>();
             services.AddScoped<MainViewModel>();
+            services.AddScoped<InvestViewModel>();
 
             services.AddScoped<MainWindow>(a => new MainWindow(a.GetRequiredService<MainViewModel>()));
 

@@ -25,14 +25,14 @@ namespace CryptoMonitor.Domain.Services
 
             if (storedAccount == null)
             {
-                throw new ArgumentException();
+                throw new MissingUserException(username);
             }
 
             PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(storedAccount.AccountOwner.PasswordHash, password);
 
             if (passwordResult != PasswordVerificationResult.Success)
             {
-                throw new Exception();
+                throw new InvalidPasswordException(username, password);
             }
 
             return storedAccount;

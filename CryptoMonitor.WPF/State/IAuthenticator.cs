@@ -15,7 +15,7 @@ namespace CryptoMonitor.WPF.State
         bool IsLoggedIn { get; }
         Task<RegistrationResult> Register(string email, string username, string password, string  confirmPassowrd);
         Task<bool> Login(string username, string password);
-
+        event Action StateChanged;
         void Logout();
     }
 }

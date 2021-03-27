@@ -10,30 +10,31 @@ using static CryptoMonitor.Domain.Services.IAuthenticationService;
 
 namespace CryptoMonitor.WPF.State
 {
-    public class Authenticator : ObservableObject, IAuthenticator
+    public class Authenticator : IAuthenticator
     {
         private readonly IAuthenticationService _authenticationService;
-        public Authenticator(IAuthenticationService authenticationService)
+        private readonly IAccountStore _accountStore;
+        public Authenticator(IAuthenticationService authenticationService, IAccountStore accountStore)
         {
             _authenticationService = authenticationService;
+            _accountStore = accountStore;
         }
-        private Account _currentAccount;
         public Account CurrentAccount
         {
             get
             {
-                return _currentAccount;
+                return _accountStore.CurrentAccount;
             }
             private set
             {
-                _currentAccount = value;
-                OnPropertyChange(nameof(CurrentAccount));
-                OnPropertyChange(nameof(IsLoggedIn));
+                _accountStore.CurrentAccount = value;
+                StateChanged?.Invoke();
             }
         }
 
         public bool IsLoggedIn => CurrentAccount != null;
 
+        public event Action StateChanged;
         public async Task<bool> Login(string username, string password)
         {
             bool success = true;

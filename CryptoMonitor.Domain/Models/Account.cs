@@ -9,5 +9,9 @@ namespace CryptoMonitor.Domain.Models
    public class Account : DomainObject
     {
         public User AccountOwner { get; set; }
+
+        public double Balance { get; set; }
+
+        public ICollection<CryptoInvestment> CryptoInvestments { get; set; }
     }
 }

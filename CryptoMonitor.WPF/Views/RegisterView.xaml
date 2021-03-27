@@ -24,7 +24,7 @@
             </Border>
 
             <StackPanel Margin="0,0,0,87">
-                <TextBlock Margin="120,0,0,0"
+                <TextBlock HorizontalAlignment="Center" Margin="90,0,0,0"
                     DataContext="{Binding ErrorMessageViewModel}"
                     Foreground="DarkRed"
                     Text="{Binding Message}"

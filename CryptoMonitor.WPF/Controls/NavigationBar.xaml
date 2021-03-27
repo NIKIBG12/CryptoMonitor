@@ -28,14 +28,14 @@
                         </StackPanel>
                     </RadioButton>
                 </ListViewItem>
-                
+
                 <ListViewItem>
                     <RadioButton Height="32" Width="96" IsChecked="{Binding Navigator.CurrentViewModel, Mode=OneWay,Converter= {StaticResource EqualValueToParameterConverter},
                         ConverterParameter={x:Type vm:ProfileViewModel}}" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Profile}">
+Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Invest}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account"/>
-                            <TextBlock Text="Profile"/>
+                            <materialDesign:PackIcon Kind="Coins"/>
+                            <TextBlock Text="Invest"/>
                         </StackPanel>
                     </RadioButton>
                 </ListViewItem>

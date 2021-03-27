@@ -12,11 +12,14 @@ namespace CryptoMonitor.WPF.ViewModels.Factories
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<ProfileViewModel> _createProfileViewModel;
         private readonly CreateViewModel<LoginViewModel> _CreateLoginViewModel;
-public CryptoMonitorViewModelAbstract(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<ProfileViewModel> createProfileViewModel, CreateViewModel<LoginViewModel> createLoginViewModel)
+        private readonly CreateViewModel<InvestViewModel> _createInvestViewModel;
+public CryptoMonitorViewModelAbstract(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<ProfileViewModel> createProfileViewModel, CreateViewModel<LoginViewModel> createLoginViewModel, CreateViewModel<InvestViewModel> createInvestViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createProfileViewModel = createProfileViewModel;
             _CreateLoginViewModel = createLoginViewModel;
+            _CreateLoginViewModel = createLoginViewModel;
+            _createInvestViewModel = createInvestViewModel;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -29,6 +32,8 @@ public CryptoMonitorViewModelAbstract(CreateViewModel<HomeViewModel> createHomeV
                     return  _createProfileViewModel();
                 case ViewType.Login:
                     return _CreateLoginViewModel();
+                case ViewType.Invest:
+                    return _createInvestViewModel();
                 default:
                     throw new ArgumentException();
             }
