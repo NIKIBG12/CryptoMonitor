@@ -14,4 +14,6 @@
 
 ➦ All data is stored and updated in MySql database
 
+➦ MVVM structure allows to easily add new features
+
 ➦ Created with WPF, C#, MySQL, MaterialDesignInXAML
