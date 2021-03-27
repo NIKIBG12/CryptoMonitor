@@ -1,7 +1,8 @@
 # CryptoMonitor
 
-Desktop App that tracks 10 cryptocurrencies in real time
+• Crypto Monitor •
 
+➦ Tracks 10 cryptocurrencies in real time
 <img src="https://i.imgur.com/p8F0LCg.gif"/>
 
 ➦ Login and Register system 
@@ -12,5 +13,6 @@ Desktop App that tracks 10 cryptocurrencies in real time
 (including messages when balance is not enough to invest)
 <img src="https://i.imgur.com/hTdBYgY.gif"/>
 
+➦ All data is stored and updated in MySql database
 
 ➦ Created with WPF, C#, MySQL, MaterialDesignInXAML
