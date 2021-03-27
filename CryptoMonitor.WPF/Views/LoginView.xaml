@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoMonitor.WPF.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:components="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600">
+             d:DesignHeight="450" d:DesignWidth="950">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -21,6 +21,13 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
+            <StackPanel Margin="0,0,0,87">
+                <TextBlock HorizontalAlignment="Center" Margin="170,0,0,0"
+                    DataContext="{Binding ErrorMessageViewModel}"
+                    Foreground="DarkRed"
+                    Text="{Binding Message}"
+                    Width="304" RenderTransformOrigin="0.624,-0.339" Height="20" />
+            </StackPanel>
 
             <StackPanel VerticalAlignment="Center">
                 <TextBlock

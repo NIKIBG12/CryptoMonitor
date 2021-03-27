@@ -35,19 +35,9 @@ namespace CryptoMonitor.WPF.State
         public bool IsLoggedIn => CurrentAccount != null;
 
         public event Action StateChanged;
-        public async Task<bool> Login(string username, string password)
+        public async Task Login(string username, string password)
         {
-            bool success = true;
-            try
-            {
                 CurrentAccount = await _authenticationService.Login(username, password);
-            }
-            catch (Exception)
-            {
-
-                success = false;
-            }
-            return success;
         }
 
         public void Logout()

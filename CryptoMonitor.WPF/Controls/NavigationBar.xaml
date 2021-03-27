@@ -34,7 +34,7 @@
                         ConverterParameter={x:Type vm:ProfileViewModel}}" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
 Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Invest}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Coins"/>
+                            <materialDesign:PackIcon Kind="Dollar"/>
                             <TextBlock Text="Invest"/>
                         </StackPanel>
                     </RadioButton>

@@ -55,6 +55,8 @@ namespace CryptoMonitor.WPF.ViewModels
             }
         }
 
+        public MessageViewModel ErrorMessageViewModel { get; }
+        public MessageViewModel StatusMessageViewModel { get; }
         public double Total
         {
             get
@@ -63,10 +65,21 @@ namespace CryptoMonitor.WPF.ViewModels
             }
         }
 
+        public string ErrorMessage 
+            {
+            set => ErrorMessageViewModel.Message = value;
+            }
+
+        public string StatusMessage
+        {
+            set => StatusMessageViewModel.Message = value;
+        }
         public ICommand SearchCurrencyCommand { get; set; }
         public ICommand InvestCryptoCommand { get; set; }
         public InvestViewModel(ICryptoPriceService cryptoPriceService, IInvestService investService, IAccountStore accountStore)
         {
+            ErrorMessageViewModel = new MessageViewModel();
+            StatusMessageViewModel = new MessageViewModel();
             SearchCurrencyCommand = new SearchCurrencyCommand(this, cryptoPriceService);
             InvestCryptoCommand = new InvestCryptoCommand(this, investService, accountStore);
         }

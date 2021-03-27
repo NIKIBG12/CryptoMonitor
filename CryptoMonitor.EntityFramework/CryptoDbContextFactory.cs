@@ -13,7 +13,7 @@ namespace CryptoMonitor.EntityFramework
         public CryptoDbContext CreateDbContext(string[] args = null)
         {
             DbContextOptionsBuilder options = new DbContextOptionsBuilder<CryptoDbContext>();
-            options.UseMySQL(".......................");
+            options.UseMySQL("...............");
             return new CryptoDbContext(options.Options);
         }
     }

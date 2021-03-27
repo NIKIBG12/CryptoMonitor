@@ -35,7 +35,7 @@
                 </Grid.Style>
                 <controls:NavigationBar/>
             </Grid>
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+            <ContentControl Content="{Binding CurrentViewModel}" Grid.ColumnSpan="2" Margin="0,0,-850,0"/>
         </Grid>
 
 

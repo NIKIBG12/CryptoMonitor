@@ -52,6 +52,7 @@ namespace CryptoMonitor.WPF.ViewModels
         public ICommand ViewRegisterCommand { get; }
         public LoginViewModel(IAuthenticator authenticator, IReNavigator loginRenavigator, IReNavigator registerRenavigator)
         {
+            ErrorMessageViewModel = new MessageViewModel();
             LoginCommand = new LoginCommand(this, authenticator, loginRenavigator);
             ViewRegisterCommand = new RenavigateCommand(registerRenavigator);
         }

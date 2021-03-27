@@ -3,8 +3,6 @@ using CryptoMonitor.Domain.Services;
 using CryptoMonitor.WPF.State;
 using CryptoMonitor.WPF.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CryptoMonitor.WPF.Commands
@@ -30,16 +28,20 @@ namespace CryptoMonitor.WPF.Commands
 
         public async void Execute(object parameter)
         {
+            _investViewModel.StatusMessage = string.Empty;
+            _investViewModel.ErrorMessage = string.Empty;
             try
             {
                 Account investor = await _investService.Invest(_accountStore.CurrentAccount, _investViewModel.Currency, _investViewModel.Quantity);
 
                 _accountStore.CurrentAccount = investor;
+
+                _investViewModel.StatusMessage = "Success";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                MessageBox.Show(e.Message);
+                _investViewModel.ErrorMessage = "Transaction failed";
             }
         }
     }
